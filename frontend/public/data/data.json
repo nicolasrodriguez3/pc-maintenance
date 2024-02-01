@@ -1,0 +1,72 @@
+[
+	{
+		"id": 1,
+		"nroSucursal": 1,
+		"sucursal": "Crespo",
+		"equipos": [
+			{
+				"id": 1,
+				"nombre": "MG01-EN100",
+				"hardware": {
+					"cpu": "intel core",
+					"memoria": "2gb",
+					"so": "windows 7"
+				},
+				"services": [
+					{ "id": 1, "fecha": "01/01/01", "descripcion": "Servicio 1" },
+					{ "id": 2, "fecha": "02/01/01", "descripcion": "Servicio 2" },
+					{ "id": 3, "fecha": "03/01/01", "descripcion": "Servicio 3" }
+				]
+			},
+			{
+				"id": 2,
+				"nombre": "MG01-AD101",
+				"hardware": {
+					"cpu": "amd ryzen",
+					"memoria": "4gb",
+					"so": "windows 11"
+				},
+				"services": [
+					{ "id": 1, "fecha": "01/01/01", "descripcion": "Servicio 1" },
+					{ "id": 2, "fecha": "02/01/01", "descripcion": "Servicio 2" },
+					{ "id": 3, "fecha": "03/01/01", "descripcion": "Servicio 3" }
+				]
+			}
+		]
+	},
+	{
+		"id": 2,
+		"nroSucursal": 2,
+		"sucursal": "Ramirez",
+		"equipos": [
+			{
+				"id": 3,
+				"nombre": "MG02-EN100",
+				"hardware": {
+					"cpu": "intel core",
+					"memoria": "2gb",
+					"so": "windows 7"
+				},
+				"services": [
+					{ "id": 1, "fecha": "01/01/01", "descripcion": "Servicio 1" },
+					{ "id": 2, "fecha": "02/01/01", "descripcion": "Servicio 2" },
+					{ "id": 3, "fecha": "03/01/01", "descripcion": "Servicio 3" }
+				]
+			},
+			{
+				"id": 4,
+				"nombre": "MG02-AD101",
+				"hardware": {
+					"cpu": "amd ryzen",
+					"memoria": "4gb",
+					"so": "windows 11"
+				},
+				"services": [
+					{ "id": 1, "fecha": "01/01/01", "descripcion": "Servicio 1" },
+					{ "id": 2, "fecha": "02/01/01", "descripcion": "Servicio 2" },
+					{ "id": 3, "fecha": "03/01/01", "descripcion": "Servicio 3" }
+				]
+			}
+		]
+	}
+]

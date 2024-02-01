@@ -1,0 +1,3 @@
+### Get all pcs
+GET localhost:3001/api
+
