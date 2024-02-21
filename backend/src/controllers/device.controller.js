@@ -1,47 +1,42 @@
 const Device = require("../models/device.model")
 
 const getAllDevices = async (req, res) => {
-	//const devices = await Device.find({})
-
-	//res.json(devices)
-	res.send("hola")
+	const devices = await Device.find({})
+	res.json(devices)
 }
 
-const getDeviceByID = async (req, res) => {
+const getDeviceByID = async (req, res, next) => {
 	const { id } = req.params
 
-	const device = Device.findById(id)
-
-	res.json(device)
+	try {
+		const device = await Device.findById(id).populate("maintenances", "detail date observation")
+		console.log({ device })
+		res.json(device)
+	} catch (err) {
+		next(err)
+	}
 }
 
 const addNewDevice = async (req, res) => {
-	const {
+	const { name, branch, ip, hardware } = req.body
+	console.log(req)
+
+	console.log({
 		name,
 		branch,
-		cpu,
-		ramType,
-		ramCapacity,
-		diskType,
-		diskCapacity,
-		hasUps,
-		upsVa,
-		batteries,
-		lastChange,
-	} = req.body
+		ip,
+		hardware,
+	})
+	const { cpu, ram, disk, ups } = hardware
 
 	const device = await Device.create({
 		name,
 		branch,
+		ip,
 		cpu,
-		ramType,
-		ramCapacity,
-		diskType,
-		diskCapacity,
-		hasUps,
-		upsVa,
-		batteries,
-		lastChange,
+		ram,
+		disk,
+		ups,
 	})
 
 	return res.status(201).json(device)
