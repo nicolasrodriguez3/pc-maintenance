@@ -1,0 +1,15 @@
+@maintenanceId = 65d4ef1eb6b013e2d1808a03
+@deviceId = 65c373c7e6e0dc130c882c55
+
+POST /maintenances/{{deviceId}}
+Host: localhost:3001/api
+
+{
+  "date": "Tue Feb 21 2024",
+  "detail": "Cambio de Cooler"
+}
+
+
+### Delete a maintenanace by ID
+DELETE /maintenances/{{maintenanceId}}
+Host: localhost:3001/api

@@ -1,0 +1,42 @@
+@deviceId = 65c373c7e6e0dc130c882c55
+
+### Get all pcs
+GET /api/devices
+Host: localhost:3001
+
+
+### Get a pc by id
+GET /api/devices/{{deviceId}}
+Host: localhost:3001
+
+
+### Create a new PC
+POST /api/devices
+Host: localhost:3001
+Content-Type: "application/json"
+
+{
+	"name": "MG01-AD101",
+  "ip": "192.168.10.101",
+  "branch": "Crespo",
+	"hardware": {
+		"cpu": "Intel Core i5",
+		"ram": {
+			"type": "DDR4",
+			"capacity": 8
+		},
+		"disk": {
+			"type": "HDD",
+			"capacity": 512
+		},
+		"ups": {
+			"has_ups": true,
+			"brand": "APC",
+			"va": 1500,
+			"batteries": {
+				"quantity": 2,
+				"last_change": "2023-06-15T00:00:00.000Z"
+			}
+		}
+	}
+}
