@@ -1,27 +1,48 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const deviceSchema = new Schema({
-	name: { type: String, required: true },
-	branch: { type: String, required: true },
-	hardware: {
-		cpu: { type: String, required: false },
-		ram: {
-			type: { type: String, required: false },
-			capacity: { type: String, required: false },
-		},
-		disk: {
-			type: { type: String, required: false },
-			capacity: { type: String, required: false },
-		},
-		ups: {
-			has_ups: { type: Boolean, required: false },
-			va: { type: String },
-			batteries: {
-				quantity: { type: Number },
-				last_change: { type: Date },
+const deviceSchema = new Schema(
+	{
+		name: { type: String, required: true },
+		ip: { type: String, required: true },
+		branch: { type: String, required: true },
+		hardware: {
+			cpu: { type: String },
+			ram: {
+				type: { type: String },
+				capacity: { type: Number },
+			},
+			disk: {
+				type: { type: String },
+				capacity: { type: Number },
+			},
+			ups: {
+				has_ups: { type: Boolean },
+				brand: { type: String },
+				va: { type: Number },
+				batteries: {
+					quantity: { type: Number },
+					last_change: { type: Date },
+				},
 			},
 		},
+		maintenances: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "Maintenance",
+			},
+		],
+	},
+	{
+		timestamps: true,
+	}
+)
+
+deviceSchema.set("toJSON", {
+	virtuals: true,
+	versionKey: false,
+	transform: function (doc, ret) {
+		delete ret._id
 	},
 })
 
