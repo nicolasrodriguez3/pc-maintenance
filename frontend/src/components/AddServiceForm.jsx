@@ -1,21 +1,39 @@
 import { useState } from "react"
 
 export default function AddServiceForm() {
-	const [formData, setFormData] = useState({})
+	const [form, setForm] = useState({})
 	const handleChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
 		})
 	}
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(formData)
+		console.log(form)
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input type="text" name="name" placeholder="Nombre" onChange={handleChange} />
+		<form
+			onSubmit={handleSubmit}
+			className="flex flex-col gap-2">
+			<input
+				type="date"
+				name=""
+				id=""
+			/>
+			<input
+				type="text"
+				name="detail"
+				placeholder="Detalle"
+				onChange={handleChange}
+			/>
+			<input
+				type="text"
+				name="observation"
+				placeholder="Observaciones"
+				onChange={handleChange}
+			/>
 			<button>Agregar mantenimiento</button>
 		</form>
 	)

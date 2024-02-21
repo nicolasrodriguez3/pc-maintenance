@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react"
 import Sucursal from "./Sucursal"
+import AddPcForm from "./AddPcForm"
+
+const API_URL = import.meta.env.VITE_API_URL
 
 export default function ListOfComputers() {
 	const [data, setData] = useState([])
 
 	useEffect(() => {
-		fetch("data/data.json")
+		fetch(`${API_URL}/api/devices`)
 			.then((res) => res.json())
 			.then((data) => setData(data))
 	}, [])
@@ -13,18 +16,23 @@ export default function ListOfComputers() {
 	return (
 		<>
 			<h2>PCs MGottig💻</h2>
-			{data.map((sucursales) => {
-				return (
-					<div key={sucursales.id}>
-						<p>Sucursal {sucursales.sucursal}</p>
-						<Sucursal
-							equipos={sucursales.equipos}
-							sucursal={sucursales.sucursal}
-							key={sucursales.id}
-						/>
-					</div>
-				)
-			})}
+			<AddPcForm />
+			<table>
+				<th>
+					<td>Equipo</td>
+					<td>Sucursal</td>
+				</th>
+				<tbody>
+					{data.map((pc) => {
+						return (
+							<tr key={pc._id}>
+								<td>Equipo {pc.name}</td>
+								<td>Sucursal {pc.branch}</td>
+							</tr>
+						)
+					})}
+				</tbody>
+			</table>
 		</>
 	)
 }
