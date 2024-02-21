@@ -1,18 +1,31 @@
+const { PORT } = require("./utils/config.js")
 const express = require("express")
+const app = express()
 require("./utils/mongoose.config")
-// const bodyParser = require("body-parser")
-// const cors = require("cors")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+
 const { requestLogger } = require("./middlewares/requestLogger")
+const { unknownEndpoint } = require("./middlewares/unknownEndpoint.js")
+const { errorHandler } = require("./middlewares/errorHandler.js")
 
 const deviceRoutes = require("./routes/device.routes")
+const maintenanceRoutes = require("./routes/maintenance.routes")
 
-const app = express()
+app.disable("x-powered-by")
 
 // Middlewares
-// app.use(cors())
-// app.use(bodyParser.json())
+app.use(cors())
+app.use(bodyParser.json())
 app.use(express.json())
 app.use(requestLogger)
 
-app.get("/", (req, res) => res.send("Hola"))
-app.get("/api/devices", deviceRoutes)
+app.use("/api/devices", deviceRoutes)
+app.use("/api/maintenances", maintenanceRoutes)
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
+
+app.listen(PORT, () => {
+	console.log(`Servidor corriendo en http://localhost:${PORT}`)
+})
