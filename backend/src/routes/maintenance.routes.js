@@ -1,16 +1,24 @@
-const router = require("express").Router()
-const {
+import { Router } from "express"
+const router = Router()
+
+import {
 	getAllMaintenances,
 	addMaintenance,
 	deleteMaintenance,
-} = require("../controllers/maintenance.controller")
+	updateMaintenance,
+	getMaintenanceByDeviceId,
+} from "../controllers/maintenance.controller.js"
 
 router.get("/", getAllMaintenances)
+router.get("/:deviceId", getMaintenanceByDeviceId)
 
 // add maintenance
 router.post("/:deviceId", addMaintenance)
 
-// delete maintenance
-router.delete("/:id", deleteMaintenance)
+// update maintenance
+router.put("/:maintenanceId", updateMaintenance)
 
-module.exports = router
+// delete maintenance
+router.delete("/:maintenanceId", deleteMaintenance)
+
+export default router

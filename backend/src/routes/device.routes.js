@@ -1,10 +1,17 @@
-const router = require("express").Router()
-const deviceController = require("../controllers/device.controller")
+import { Router } from "express"
+import {
+	addNewDevice,
+	getAllDevices,
+	getDeviceByID,
+	deleteDevice,
+	updateDevice,
+} from "../controllers/device.controller.js"
+const router = Router()
 
-// GET All devices
-router.get("/", deviceController.getAllDevices)
-router.get("/:id", deviceController.getDeviceByID)
-router.post("/", deviceController.addNewDevice)
-router.delete("/:id", deviceController.deleteDevice)
+router.get("/", getAllDevices)
+router.get("/:id", getDeviceByID)
+router.post("/", addNewDevice)
+router.post("/:id", updateDevice)
+router.delete("/:id", deleteDevice)
 
-module.exports = router
+export default router

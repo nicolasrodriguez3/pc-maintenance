@@ -1,11 +1,10 @@
-const mongoose = require("mongoose")
-const config = require("./config")
+import { connect } from "mongoose"
+import { MONGODB_URI } from "./config.js"
 
 // Connection URL for MongoDB Atlas
-const uri = config.MONGODB_URI
+const uri = MONGODB_URI
 
 // Connect to MongoDB Atlas
-mongoose
-	.connect(uri)
+connect(uri)
 	.then(() => console.log("MongoDB connection established"))
 	.catch((err) => console.log(err))

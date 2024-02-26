@@ -1,15 +1,37 @@
-@maintenanceId = 65d4ef1eb6b013e2d1808a03
+@maintenanceId = 65d4ed8a9fd9772ac8254348
 @deviceId = 65c373c7e6e0dc130c882c55
 
-POST /maintenances/{{deviceId}}
+### Get maintenances
+GET /maintenances
 Host: localhost:3001/api
 
+### Get maintenances by device id
+GET /maintenances/{{deviceId}}
+Host: localhost:3001/api
+
+
+### Add maintenance to device
+POST /maintenances/{{deviceId}}
+Host: localhost:3001/api
+Content-Type: application/json
+
 {
-  "date": "Tue Feb 21 2024",
-  "detail": "Cambio de Cooler"
+  "date": "Feb 26 2024",
+  "detail": "Instalación de SSD"
+}
+
+### Update maintenance
+PUT /maintenances/{{maintenanceId}}
+Host: localhost:3001/api
+Content-Type: application/json
+
+{
+  "date": "Feb 23 2024",
+  "detail": "Cambio de Cooler",
+  "observation": null
 }
 
 
-### Delete a maintenanace by ID
+### Delete a maintenance by ID
 DELETE /maintenances/{{maintenanceId}}
 Host: localhost:3001/api

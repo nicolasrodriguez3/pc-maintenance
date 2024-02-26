@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+import { Schema, model } from "mongoose"
 
 const deviceSchema = new Schema(
 	{
@@ -46,6 +45,4 @@ deviceSchema.set("toJSON", {
 	},
 })
 
-const Device = mongoose.model("Device", deviceSchema)
-
-module.exports = Device
+export const Device = model("Device", deviceSchema)

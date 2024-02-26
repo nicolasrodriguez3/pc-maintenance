@@ -1,4 +1,4 @@
-@deviceId = 65c373c7e6e0dc130c882c55
+@deviceId = 65d64191ba38d662feb54ec3
 
 ### Get all pcs
 GET /api/devices
@@ -13,7 +13,7 @@ Host: localhost:3001
 ### Create a new PC
 POST /api/devices
 Host: localhost:3001
-Content-Type: "application/json"
+Content-Type: application/json
 
 {
 	"name": "MG01-AD101",
@@ -40,3 +40,38 @@ Content-Type: "application/json"
 		}
 	}
 }
+
+### Update a PC
+POST /api/devices/{{deviceId}}
+Host: localhost:3001
+Content-Type: application/json
+
+{
+  "name": "MG01-EN100",
+  "ip": "192.168.10.100",
+  "hardware": {
+    "cpu": "Intel Core i5",
+    "ram": {
+      "type": "DDR4",
+      "capacity": 4
+    },
+    "disk": {
+      "type": "SSD",
+      "capacity": 120
+    },
+    "ups": {
+      "has_ups": true,
+      "brand": "APC",
+      "va": 500,
+      "batteries": {
+        "quantity": 1,
+        "last_change": "2023-06-15T00:00:00.000Z"
+      }
+    }
+  }
+}
+
+
+### Delete a device
+DELETE /api/devices/{{deviceId}}
+Host: localhost:3001

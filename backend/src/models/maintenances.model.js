@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+import { Schema, model } from "mongoose"
 
 const maintenanceSchema = new Schema(
 	{
@@ -20,6 +19,5 @@ maintenanceSchema.set("toJSON", {
 		delete ret._id
 	},
 })
-const Maintenance = mongoose.model("Maintenance", maintenanceSchema)
 
-module.exports = Maintenance
+export const Maintenance = model("Maintenance", maintenanceSchema)

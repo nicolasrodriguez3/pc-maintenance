@@ -1,4 +1,4 @@
-const requestLogger = (request, response, next) => {
+export const requestLogger = (request, response, next) => {
 	if (process.env.NODE_ENV === "test") {
 		return next()
 	}
@@ -12,5 +12,3 @@ const requestLogger = (request, response, next) => {
 	}
 	next()
 }
-
-module.exports = { requestLogger }

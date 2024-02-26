@@ -1,4 +1,4 @@
-const Device = require("../models/device.model")
+import { Device } from "../models/device.model.js"
 
 const getAllDevices = async (req, res) => {
 	const devices = await Device.find({})
@@ -19,30 +19,46 @@ const getDeviceByID = async (req, res, next) => {
 
 const addNewDevice = async (req, res) => {
 	const { name, branch, ip, hardware } = req.body
-	console.log(req)
-
-	console.log({
-		name,
-		branch,
-		ip,
-		hardware,
-	})
-	const { cpu, ram, disk, ups } = hardware
 
 	const device = await Device.create({
 		name,
 		branch,
 		ip,
-		cpu,
-		ram,
-		disk,
-		ups,
+		hardware,
 	})
 
 	return res.status(201).json(device)
 }
 
-const updateDevice = async (req, res) => {}
+const updateDevice = async (req, res, next) => {
+	const { id } = req.params
+	if (!id) return res.status(400).json({ error: `Id es requerido` })
+
+	try {
+		const deviceToUpdate = await Device.findById(id)
+		if (!deviceToUpdate)
+			return res.status(404).json({ error: `No se encontró dispositivo con id ${id}` })
+
+		const { name, branch, ip, hardware } = req.body
+		const device = await Device.findByIdAndUpdate(
+			id,
+			{
+				name,
+				branch,
+				ip,
+				hardware,
+			},
+			{
+				new: true,
+			}
+		).populate("maintenances", "detail date observation")
+
+		res.json(device)
+	} catch (err) {
+		next(err)
+	}
+}
+
 const deleteDevice = async (req, res) => {
 	const { id } = req.params
 
@@ -51,6 +67,9 @@ const deleteDevice = async (req, res) => {
 	if (!deviceToDelete) {
 		return res.status("404").json({ error: "No se encontró el dispositivo con id: " + id })
 	}
+
+	await Device.findByIdAndDelete(id)
+	res.status(200).end()
 }
 
-module.exports = { addNewDevice, getAllDevices, getDeviceByID, deleteDevice, updateDevice }
+export { addNewDevice, getAllDevices, getDeviceByID, deleteDevice, updateDevice }
