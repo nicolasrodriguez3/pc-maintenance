@@ -16,17 +16,21 @@ export default function ListOfComputers() {
 	return (
 		<>
 			<h2>PCs MGottig💻</h2>
-			<AddPcForm />
+
 			<table>
-				<th>
-					<td>Equipo</td>
-					<td>Sucursal</td>
-				</th>
+				<thead>
+					<tr>
+						<th>Equipo</th>
+						<th>IP</th>
+						<th>Sucursal</th>
+					</tr>
+				</thead>
 				<tbody>
 					{data.map((pc) => {
 						return (
-							<tr key={pc._id}>
-								<td>Equipo {pc.name}</td>
+							<tr key={pc.id}>
+								<td className="text-left">Equipo {pc.name}</td>
+								<td>{pc.ip}</td>
 								<td>Sucursal {pc.branch}</td>
 							</tr>
 						)
